@@ -52,6 +52,7 @@ module Guessr
 
     def run
       welcome
+      scoreboard
       choose_player
       while play_again?
         choose_game
@@ -76,5 +77,15 @@ module Guessr
       puts "At any time, you may exit the game by pressing (q) to Quit."
       puts "\n\n"
     end
+
+    def scoreboard
+      puts "Scoreboard\n"
+      Player.order(score: :desc).each do |player|
+        puts "#{player.name} #{player.score}"
+      end
+      puts
+      puts
+    end
+
   end
 end

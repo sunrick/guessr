@@ -51,12 +51,22 @@ module Guessr
       else
         puts "You win!"
         self.update(finished: true)
+        self.player.update(score: self.player.score + self.game_score)
       end
     end
+
+    def game_score
+      if self.guess_count <= 11
+        result = 100 - self.guess_count*10
+      else
+        result = 0
+      end
+    end
+
   end
 end
 
-# binding.pry
+binding.pry
 
 menu = Guessr::Menu.new
 menu.run
