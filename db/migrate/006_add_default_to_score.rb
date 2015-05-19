@@ -7,6 +7,6 @@ class AddDefaultToScore < ActiveRecord::Migration
   end
 
   def down
-    change_column_default, :players, :score, nil
+    change_column_default :players, :score, nil
   end
 end
