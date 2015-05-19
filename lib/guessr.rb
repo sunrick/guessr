@@ -17,9 +17,12 @@ require 'guessr/init_db'
 
 module Guessr
   class Player < ActiveRecord::Base
+    has_many :games
   end
 
   class Game < ActiveRecord::Base
+    belongs_to :player
+
     def win?
       self.answer == self.last_guess
     end
