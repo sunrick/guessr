@@ -33,7 +33,7 @@ module Guessr
         puts "Please choose new game (1) or existing game (2). Doofus."
         result = gets.chomp
       end
-      if result == 1
+      if result.to_i == 1
         @game = @player.games.create(answer: rand(100),
                                      guess_count: 0)
       else
@@ -57,6 +57,7 @@ module Guessr
         choose_game
         @game.play
       end
+      puts "Thanks for playing!"
     end
 
     def play_again?

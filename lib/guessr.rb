@@ -1,6 +1,7 @@
 require 'pry'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'guessr/version'
 require 'guessr/init_db'
 require 'guessr/menu'
@@ -55,5 +56,7 @@ module Guessr
   end
 end
 
-menu = Menu.new
+# binding.pry
+
+menu = Guessr::Menu.new
 menu.run
