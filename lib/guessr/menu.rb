@@ -80,11 +80,28 @@ module Guessr
 
     def scoreboard
       puts "Scoreboard\n"
-      Player.order(score: :desc).each do |player|
-        puts "#{player.name} #{player.score}"
+      result = []
+      result = self.sort_by_ratio
+      result.each do |x|
+        name = x[0]
+        ratio = x[1]
+        puts "#{name} #{ratio}"
       end
       puts
       puts
+    end
+
+    def sort_by_ratio
+      result = []
+      Player.all.map do |x|
+        if x.games.count.zero?
+          result << [x.name, 0]
+        else
+          result << [x.name, x.score/x.games.count]
+        end
+      end
+      result = result.sort_by{ |x| x[1] }.reverse
+      result
     end
 
   end
