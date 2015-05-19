@@ -3,6 +3,7 @@ require 'pry'
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'guessr/version'
 require 'guessr/init_db'
+require 'guessr/menu'
 
 ## Number Guessing Game
 #* New Game
@@ -23,12 +24,12 @@ module Guessr
   class Game < ActiveRecord::Base
     belongs_to :player
 
-    def win?
+    def game_over?
       self.answer == self.last_guess
     end
 
     def play
-      until self.win?
+      until self.game_over?
         puts "Please guess a number (or quit with 'q'): "
         result = gets.chomp
         if result == 'q'
@@ -48,9 +49,11 @@ module Guessr
         puts "Too low!"
       else
         puts "You win!"
+        self.update(finished: true)
       end
     end
   end
-
-  binding.pry
 end
+
+menu = Menu.new
+menu.run
