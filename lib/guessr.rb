@@ -56,7 +56,7 @@ module Guessr
     end
 
     def game_score
-      if self.guess_count <= 11
+      if self.guess_count <= 10
         result = 100 - self.guess_count*10
       else
         result = 0
